@@ -29,7 +29,7 @@ const initPlayers = (players) => {
     for (let i = 0; i < players.length; i++) {
         detailedPlayers.push({
             'name': players[i],
-            'strength':100,
+            'strength':getRandomStrength(),
             'image':"./images/super-" + (i + 1) + ".png",
             'type':"hero|villain"
         });
@@ -45,45 +45,28 @@ const getRandomStrength = () => {
 }
 
 const buildPlayers = (players, type) => {
-    let fragment = '';
-    fragment = '<divclass="player"><imgsrc="./images/super-1.png"alt=""><divclass="name">Hero</div><divclass="strength">100</div></div>';
-
+    let fragment = "";
     // Loop through players and accumulate HTML template
     // depending of type of player(hero|villain)
     // Type your code here
-    // var title = "Building Players";
-    // var container = $("<div>");
-    // container.addClass("player");
-    // var img = $("<img>");
-    // img.src("${players[i].image}");
+    if (type == "hero")
+        var i = 0
+    else
+        var i = 1
+    while(i < players.length) {
+        fragment += `<div class="player">
+            <img src="${players[i].image}" alt="">
+            <div class="name">${players[i].name}</div>
+            <div class="strength">${players[i].strength}</div></div>`;
+        i+=1;
+    }
+    return fragment;
+};
 
-    // var div = $("<div>");
-    // div.addClass("name");
-    // var h4 = $("<h4>");
-    // h4.text("${players[i].name}");
-    // div.append(h4);
-    // container.append(div);
-
-    // div = $("<div>");
-    // div.addClass("name");
-    // h4 = $("<h4>");
-    // h4.text("${players[i].strength}");
-    // div.append(h4);
-
-    // container.append(div);
-    // container.append(img);
-
-    // $("body").append(container);
-    
-    //return container;
-    return fragment
-}
 // Display players in HTML
 const viewPlayers = (players) => {
-
     document.getElementById('heroes').innerHTML = buildPlayers(players, 'hero');
     document.getElementById('villains').innerHTML = buildPlayers(players, 'villain');
-
 }
 
 window.onload = () => {
